@@ -13,3 +13,22 @@ Route::get('about', function () {
 Route::get('profil',function () {
     return view('profil');
 });
+
+// route dengan parameter
+Route::get('welcome/{salam}', function($salam) {
+    // return 'selamat '. $salam;
+    return view('salam')->with('viewsalam', $salam);
+});
+
+// Route tanpa parameter listdata
+// terdapat arrray list
+Route::get('listdata', function() {
+    $list = ["sistem informasi","informatika","manajemen"];
+    $listmhs = [
+        ["npm" => 001, "nama" => "eric"],
+        ["npm" => 002, "nama" => "nabila"],
+    ];
+    return view('listprodi')->with('viewlist', $list)->with('viewmhs', $listmhs);
+});
+
+Route::resource('fakultas', FakultasController::class);
