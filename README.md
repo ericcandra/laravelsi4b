@@ -16,6 +16,7 @@ http://127.0.0.1:8000/profil
 http://127.0.0.1:8000/welcome/siang
 http://127.0.0.1:8000/listdata
 http://127.0.0.1:8000/Fakultas
+http://127.0.0.1:8000/Prodi
 
 method :
 get 
