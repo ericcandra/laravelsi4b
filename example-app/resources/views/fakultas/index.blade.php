@@ -17,11 +17,13 @@
                   <p class="card-description">
                     Add class <code>list data Fakultas</code>
                   </p>
+                  {{-- {{tombol tambah}} --}}
+                  <a href="{{route('fakultas.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>NAma Fakultas</th>
+                          <th>Nama Fakultas</th>
                           <th>Singkatan</th>
                         </tr>
                       </thead>
