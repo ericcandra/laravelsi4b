@@ -1,8 +1,8 @@
-extends('layout.main')
+@extends('layout.main')
 
-@section('title','Fakultas')
+@section('title','prodi')
 
-@section('content')
+@section('konten')
     {{-- <h1>UMDP</h1>
     <h2>prodi</h2>
     <ul>
@@ -17,6 +17,7 @@ extends('layout.main')
                   <p class="card-description">
                     Add class <code>list data Prodi</code>
                   </p>
+                  <a href="{{route('prodi.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -38,4 +39,14 @@ extends('layout.main')
                 </div>
               </div>
             </div>
+            @if(session('success'))
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                  title: "Good job!",
+                  text: "{{session('success') }}",
+                  icon: "success"
+                });
+            </script>
+          @endif
 @endsection
