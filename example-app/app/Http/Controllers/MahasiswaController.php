@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\mahasiswa;
+use App\Models\Fakultas;
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MahasiswaController extends Controller
 {
@@ -12,7 +15,9 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = mahasiswa::all();
+        return view('mahasiswa.index')
+            ->with('mahasiswa',$mahasiswa);
     }
 
     /**
@@ -20,7 +25,9 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $prodi = prodi::all(); 
+        return view('mahasiswa.create')
+        ->with('prodi',$prodi);
     }
 
     /**
@@ -28,7 +35,23 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $val = $request->validate([
+            'id'=> 'required',
+            'npm'=>'required',
+            'nama'=>"required|unique:mahasiswas",
+            'tempat_lahir'=>'required',
+            'tanggal_lahir'=>'required',
+            'alamat'=>'required',
+            'prodi_id' => 'required',
+            'url_foto' => 'Required'
+        ]);
+
+        // simpan ke tabel mahasiswa
+        Mahasiswa::create($val);
+
+        // redirect ke halaman list fakultas
+        return redirect()->route('mahasiswa.index')->with('success',$val['nama'].'berhasil disimpan');
     }
 
     /**
