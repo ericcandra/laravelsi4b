@@ -36,15 +36,14 @@ class FakultasController extends Controller
         // validasi form
         $val = $request->validate([
             'nama'=>"required|unique:fakultas",
-            'singkatan'=>"required|max:4",
-            'fakultas_id' => "required"
+            'singkatan'=>"required|max:4"
         ]);
 
         // simpan ke tabel fakultas
-        prodi::create($val);
+        Fakultas::create($val);
 
         // redirect ke halaman list fakultas
-        return redirect()->route('prodi.index')->with('success',$val['nama'].'berhasil disimpan');
+        return redirect()->route('fakultas.index')->with('success',$val['nama'].'berhasil disimpan');
     }
 
     /**
