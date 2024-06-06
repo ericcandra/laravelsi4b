@@ -49,8 +49,9 @@
                                 @method('DELETE')
                                 @csrf
                                 <button type="sumbit" class="btn btn-sm btn-rounded btn-danger show_confirm" data-name="{{$item["nama"]}}">Hapus</button>
+                                <a href="{{route('mahasiswa.edit',$item["id"])}}" class="btn btn-sm btn-rounded btn-warning">ubah</a>
                               </form>
-                            </td>
+                              </td>
                         </tr>
                          @endforeach
                       </tbody>
@@ -59,12 +60,10 @@
                 </div>
               </div>
             </div>
-            <script
-            src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"></script>
-            @if(session('success'))
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            @if(session('success'))
+            
             <script>
                 Swal.fire({
                   title: "yakin",
