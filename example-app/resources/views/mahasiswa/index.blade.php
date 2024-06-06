@@ -42,7 +42,15 @@
                             <td>{{$item["tanggal_lahir"]}}</td>
                             <td>{{$item["alamat"]}}</td>
                             <td>{{$item["prodi_id"]}}</td>
+                            <td><img src="{{url('foto/'. $item["url_foto"]) }}"></td>
                             <td>{{$item["url_foto"]}}</td>
+                            <td>
+                              <form action="{{route('mahasiswa.destroy',$item['id'])}}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button type="sumbit" class="btn btn-sm btn-rounded btn-danger show_confirm" data-name="{{$item["nama"]}}">Hapus</button>
+                              </form>
+                            </td>
                         </tr>
                          @endforeach
                       </tbody>
@@ -51,14 +59,51 @@
                 </div>
               </div>
             </div>
+            <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
             @if(session('success'))
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 Swal.fire({
-                  title: "Good job!",
+                  title: "yakin",
                   text: "{{session('success') }}",
                   icon: "success"
                 });
             </script>
           @endif
+          {{-- confirm dialog --}}
+          <script type="text/javascript">
+           
+            $('.show_confirm').click(function(event) {
+                 var form =  $(this).closest("form");
+                 var name = $(this).data("name");
+                 event.preventDefault();
+                 Swal.fire({
+                  title: "yakin mau dihapus?",
+                  text: "setelah dihapus data tidak bisa dikembalikan",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "ya, hapus!"
+                })
+                .then((result) => {
+                if (result.isConfirmed) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: ""
+                });
+                }
+                });
+                 .then((willDelete) => {
+                   if (willDelete.isConfirmed) {
+                     form.submit();
+                   }
+                 });
+             });
+         
+       </script>
 @endsection

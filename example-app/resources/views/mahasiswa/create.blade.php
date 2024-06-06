@@ -12,7 +12,7 @@
             <p class="card-description">
               Formulir tambah mahasiswa
             </p>
-            <form method="POST" action="{{ route('mahasiswa.store')}}" class ="forms-sample">
+            <form method="POST" action="{{ route('mahasiswa.store')}}" class ="forms-sample" enctype="multipart/form-data">
             @csrf
               <div class="form-group">
                 <label for="text">id</label>
@@ -55,7 +55,10 @@
               </div>
               <div class="form-group">
                 <label for="text">url foto</label>
-                <input type="text" class="form-control" name="url_foto" placeholder="">
+                <input type="file" class="form-control" name="url_foto"
+                @error('url_foto')
+                  <span class="text-danger">{{$message}}</span>    
+                @enderror>
               </div>
               <button type="submit" class="btn btn-primary mr-2">Submit</button>
               <a href="{{ url('mahasiswa')}}" class="btn btn-light">Batal</a>
